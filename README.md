@@ -1,4 +1,4 @@
-winston-express
+churchill
 ===============
 
-A winston express logger
+A winston express logger called churchill

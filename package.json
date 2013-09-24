@@ -1,0 +1,12 @@
+{
+  "author": "Ben Marvell <madmarv187@gmail.com>",
+  "name": "churchill",
+  "description": "Simple express logger for winston",
+  "version": "0.0.1",
+  "homepage": "https://github.com/easternbloc/churchill",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/easternbloc/churchill.git"
+  },
+  "main": "index.js"
+}
