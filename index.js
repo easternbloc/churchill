@@ -24,7 +24,7 @@ fn = function (req, res, next) {
         res.end(chunk, encoding);
 
         requestToLog.status = res.statusCode;
-        requestToLog.response_time = (new Date() - req._startTime) + 'ms';
+        requestToLog.response_time = (new Date() - req._startTime);
 
         loggers.forEach(function (arr) {
             var logger = arr[0],
