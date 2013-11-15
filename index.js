@@ -24,7 +24,7 @@ fn = function (req, res, next) {
         res.end(chunk, encoding);
 
         requestToLog.status = res.statusCode;
-        requestToLog.response_time = (new Date() - req._startTime) + 'ms';
+        requestToLog.response_time = (new Date() - req._startTime);
         requestToLog.content_length = (res.raw && typeof res.raw.length === 'function' ? res.raw.length() : res.raw.length) || '-';
 
         loggers.forEach(function (arr) {
