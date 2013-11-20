@@ -25,7 +25,9 @@ fn = function (req, res, next) {
 
         requestToLog.status = res.statusCode;
         requestToLog.response_time = (new Date() - req._startTime);
-        requestToLog.content_length = (res.raw && typeof res.raw.length === 'function' ? res.raw.length() : res.raw.length) || '-';
+        if (res.get('Content-Length')) {
+            requestToLog.content_length = res.get('Content-Length');
+        }
 
         loggers.forEach(function (arr) {
             var logger = arr[0],
