@@ -1,6 +1,15 @@
 var url = require('url'),
+    formatter = function () {},
     add = function (logger, level) {
         loggers.push([logger, level]);
+        return fn;
+    },
+    format = function (func) {
+        var _formatter = formatter;
+        formatter = function (obj, req, res) {
+            _formatter(obj, req, res);
+            func(obj, req, res);
+        };
         return fn;
     },
     loggers = [],
@@ -29,6 +38,8 @@ fn = function (req, res, next) {
             requestToLog.content_length = res.get('Content-Length');
         }
 
+        formatter(requestToLog, req, res);
+
         loggers.forEach(function (arr) {
             var logger = arr[0],
                 level = arr[1];
@@ -41,6 +52,7 @@ fn = function (req, res, next) {
 };
 
 fn.add = add;
+fn.format = format;
 
 Churchill = function (logger, level) {
     add(logger, level);
@@ -48,5 +60,6 @@ Churchill = function (logger, level) {
 };
 
 Churchill.add = add;
+Churchill.format = format;
 
 module.exports = Churchill;
