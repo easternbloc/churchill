@@ -8,5 +8,14 @@
     "type": "git",
     "url": "git://github.com/easternbloc/churchill.git"
   },
+  "scripts": {
+    "test": "mocha test.js"
+  },
+  "devDependencies": {
+    "mocha": "1.15.1",
+    "chai": "1.8.1",
+    "sinon": "1.7.3",
+    "sinon-chai": "2.4.0"
+  },
   "main": "index.js"
 }
