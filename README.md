@@ -51,3 +51,7 @@ info:  status=200, method=GET, url=/, response_time=4
 info:  status=304, method=GET, url=/, response_time=1
 info:  status=304, method=GET, url=/, response_time=0
 ```
+
+Examples
+--------
+To run the examples go into the example dir and ```npm install``` then just ```node simple``` or ```node multiple``` to see them in action.
