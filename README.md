@@ -42,3 +42,16 @@ app.use(require('churchill').add(logger, 'express').format(function (obj, req, r
   obj.somethingInteresting = req.params.moreData;
 }));
 ```
+
+Output
+------
+In it's simplest form a console output looks like this:
+```
+info:  status=200, method=GET, url=/, response_time=4
+info:  status=304, method=GET, url=/, response_time=1
+info:  status=304, method=GET, url=/, response_time=0
+```
+
+Examples
+--------
+To run the examples go into the example dir and ```npm install``` then just ```node simple``` or ```node multiple``` to see them in action.
