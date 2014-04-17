@@ -1,0 +1,10 @@
+{
+  "name": "Churchill_Log_Example",
+  "version": "0.0.0",
+  "description": "Example app to show how churchill logs",
+  "dependencies": {
+    "express": "4.0.0",
+    "winston": "0.7.3",
+    "churchill": "0.0.5"
+  }
+}
