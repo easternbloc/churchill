@@ -1,3 +1,7 @@
+var options = {
+    logGetParams: true
+};
+
 var url = require('url'),
     formatter = function () {},
     add = function (logger, level) {
@@ -17,11 +21,18 @@ var url = require('url'),
     Churchill;
 
 fn = function (req, res, next) {
+    var urlToLog;
+    if (Churchill.options.logGetParams) {
+        urlToLog = req.originalUrl;
+    } else {
+        var oUrl = url.parse(req.originalUrl);
+        urlToLog = oUrl.protocol + '//' + oUrl.host + oUrl.pathname;
+    }
     var requestEnd = res.end,
         requestToLog = {
             status: null,
             method: req.method,
-            url: req.originalUrl
+            url: urlToLog
         };
 
     //if we're using a connect middleware logger this will already exist
@@ -61,5 +72,6 @@ Churchill = function (logger, level) {
 
 Churchill.add = add;
 Churchill.format = format;
+Churchill.options = options;
 
 module.exports = Churchill;

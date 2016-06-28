@@ -43,6 +43,12 @@ app.use(require('churchill').add(logger, 'express').format(function (obj, req, r
 }));
 ```
 
+Suppressing GET params from logs
+```
+var churchill = require('churchill')
+churchill.options.logGetParams = false
+```
+
 Output
 ------
 In it's simplest form a console output looks like this:

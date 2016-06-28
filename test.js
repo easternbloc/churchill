@@ -14,7 +14,11 @@ describe('Churchill', function(){
     beforeEach(function () {
         req = {
             method: 'GET',
-            originalUrl: 'http://imaurl.com'
+            originalUrl: 'http://imaurl.com/myroute?queryParam=queryParamValue&queryParam2=queryParamValue2',
+            query: {
+                queryParam: 'queryParamValue',
+                queryParam2: 'queryParamValue2'
+            }
         };
         res = {
             statusCode: 200,
@@ -40,7 +44,30 @@ describe('Churchill', function(){
             method: 'GET',
             status: 200,
             response_time: responseTime,
-            url: 'http://imaurl.com',
+            url: 'http://imaurl.com/myroute?queryParam=queryParamValue&queryParam2=queryParamValue2',
+            content_length: '100'
+        });
+
+    });
+
+    it('logs request without the get params if configured to do so', function () {
+
+        var logSpy = sinon.spy();
+
+        churchill.options.logGetParams = false;
+        churchill.add({
+            log: logSpy
+        })(req, res, next);
+
+        res.end();
+
+        var responseTime = logSpy.lastCall.args[1].response_time;
+
+        logSpy.should.have.been.calledWith('info', {
+            method: 'GET',
+            status: 200,
+            response_time: responseTime,
+            url: 'http://imaurl.com/myroute',
             content_length: '100'
         });
 
