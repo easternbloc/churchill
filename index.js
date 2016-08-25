@@ -26,7 +26,19 @@ fn = function (req, res, next) {
         urlToLog = req.originalUrl;
     } else {
         var oUrl = url.parse(req.originalUrl);
-        urlToLog = oUrl.protocol + '//' + oUrl.host + oUrl.pathname;
+        urlToLog = oUrl.pathname;
+
+        if (oUrl.host) {
+          if (oUrl.port) {
+            urlToLog = ':' + oUrl.port + urlToLog;
+          }
+
+          urlToLog = oUrl.host + urlToLog;
+
+          if (oUrl.protocol) {
+            urlToLog = oUrl.protocol + '//' + urlToLog;
+          }
+        }
     }
     var requestEnd = res.end,
         requestToLog = {

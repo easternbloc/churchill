@@ -73,4 +73,35 @@ describe('Churchill', function(){
 
     });
 
+    describe('when the the url is not complete', function () {
+
+      beforeEach(function () {
+        req.originalUrl = '/myroute?queryParam=queryParamValue&queryParam2=queryParamValue2';
+      });
+
+      it('logs request without the get params if configured to do so', function () {
+
+          var logSpy = sinon.spy();
+
+          churchill.options.logGetParams = false;
+          churchill.add({
+              log: logSpy
+          })(req, res, next);
+
+          res.end();
+
+          var responseTime = logSpy.lastCall.args[1].response_time;
+
+          logSpy.should.have.been.calledWith('info', {
+              method: 'GET',
+              status: 200,
+              response_time: responseTime,
+              url: '/myroute',
+              content_length: '100'
+          });
+
+      });
+
+    });
+
 });
