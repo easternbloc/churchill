@@ -72,7 +72,7 @@ fn = function (req, res, next) {
         });
     };
 
-    if (Churchill.options.reqLogger && loggers.length === 1) {
+    if (Churchill.options.reqLogger && loggers.length === 1 && req.logger === undefined) {
         req.logger = loggers[0];
     }
 

@@ -35,8 +35,8 @@ var logger = new (winston.Logger).....
 app.use(require('churchill').add(logger, 'express').add(logger, 'someOtherLogLevel'));
 ```
 
-`req.logger`
-If only one logger is added to churchill then it will be automatically added to req.logger
+```req.logger```
+If only one logger is added to churchill then it will be automatically added to req.logger (if its undefined)
 This then gives you the facility to use the logger from req like so:
 ```
 req.logger.log('something in winston');
