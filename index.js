@@ -1,5 +1,6 @@
 var options = {
-    logGetParams: true
+    logGetParams: true,
+    reqLogger: true
 };
 
 var url = require('url'),
@@ -70,6 +71,10 @@ fn = function (req, res, next) {
             logger.log(level, requestToLog);
         });
     };
+
+    if (Churchill.options.reqLogger && loggers.length === 1 && req.logger === undefined) {
+        req.logger = loggers[0];
+    }
 
     next();
 };
