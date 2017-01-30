@@ -35,6 +35,15 @@ var logger = new (winston.Logger).....
 app.use(require('churchill').add(logger, 'express').add(logger, 'someOtherLogLevel'));
 ```
 
+`req.logger`
+If only one logger is added to churchill then it will be automatically added to req.logger
+This then gives you the facility to use the logger from req like so:
+```
+req.logger.log('something in winston');
+req.logger.error('Oh noe!');
+```
+To disable this set reqLogger to false in the options.
+
 Formatting
 ```
 var logger = new (winston.Logger).....
