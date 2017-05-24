@@ -17,6 +17,10 @@ var url = require('url'),
         };
         return fn;
     },
+    log = function () {
+        var args = arguments;
+        loggers.forEach(logger => logger[0].log.apply(logger[0], args));
+    }
     loggers = [],
     fn,
     Churchill;
@@ -72,10 +76,10 @@ fn = function (req, res, next) {
         });
     };
 
-    if (Churchill.options.reqLogger && req.logger === undefined) {
-        req.logger = function () {
-            const args = arguments;
-            loggers.forEach((logger) => logger[0].apply(logger[0], args));
+    if (Churchill.options.reqLogger) {
+        req.log = log;
+        if (loggers.length && req.logger === undefined) {
+            req.logger = loggers[0][0];
         }
     }
 
