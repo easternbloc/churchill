@@ -19,13 +19,13 @@ npm test
 
 Usage
 ----
-```
+```js
 var churchill = require('churchill');
 app.use(require('churchill')(winston));
 ```
 
 Specify a log level
-```
+```js
 app.use(require('churchill')(winston, 'express'));
 ```
 
@@ -36,16 +36,24 @@ app.use(require('churchill').add(logger, 'express').add(logger, 'someOtherLogLev
 ```
 
 ```req.logger```
-If only one logger is added to churchill then it will be automatically added to req.logger (if its undefined)
+The first logger will be automatically added to req.logger
 This then gives you the facility to use the logger from req like so:
-```
+```js
 req.logger.log('something in winston');
 req.logger.error('Oh noe!');
 ```
+
+```req.log```
+Churchill will also add a `log` method to the request object, which will log to all mounted loggers:
+```js
+req.log('info', 'something in winston');
+req.log('error', 'OH NO!');
+```
+
 To disable this set reqLogger to false in the options.
 
 Formatting
-```
+```js
 var logger = new (winston.Logger).....
 app.use(require('churchill').add(logger, 'express').format(function (obj, req, res) {
   obj.somethingInteresting = req.params.moreData;
@@ -53,7 +61,7 @@ app.use(require('churchill').add(logger, 'express').format(function (obj, req, r
 ```
 
 Suppressing GET params from logs
-```
+```js
 var churchill = require('churchill')
 churchill.options.logGetParams = false
 ```
