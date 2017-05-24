@@ -72,8 +72,11 @@ fn = function (req, res, next) {
         });
     };
 
-    if (Churchill.options.reqLogger && loggers.length === 1 && req.logger === undefined) {
-        req.logger = loggers[0][0];
+    if (Churchill.options.reqLogger && req.logger === undefined) {
+        req.logger = function () {
+            const args = arguments;
+            loggers.forEach((logger) => logger[0].apply(logger[0], args));
+        }
     }
 
     next();
