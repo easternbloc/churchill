@@ -1,8 +1,11 @@
+'use strict';
+
 var options = {
     logGetParams: true,
     reqLogger: true
 };
 
+var fn, loggers = [];
 var url = require('url'),
     formatter = function () {},
     add = function (logger, level) {
@@ -20,9 +23,7 @@ var url = require('url'),
     log = function () {
         var args = arguments;
         loggers.forEach(logger => logger[0].log.apply(logger[0], args));
-    }
-    loggers = [],
-    fn,
+    },
     Churchill;
 
 fn = function (req, res, next) {
