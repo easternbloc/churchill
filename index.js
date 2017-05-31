@@ -61,6 +61,7 @@ fn = function (req, res, next) {
         res.end(chunk, encoding);
 
         requestToLog.status = res.statusCode;
+        requestToLog.referer = req.headers.referer;
         requestToLog.response_time = (new Date() - req._startTime);
         if (res.get('Content-Length')) {
             requestToLog.content_length = res.get('Content-Length');
