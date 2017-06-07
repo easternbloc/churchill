@@ -40,13 +40,13 @@ describe('Churchill', function(){
 
         var responseTime = logSpy.lastCall.args[1].response_time;
 
-        logSpy.should.have.been.calledWith('info', {
+        logSpy.should.have.been.calledWith('info', sinon.match({
             method: 'GET',
             status: 200,
             response_time: responseTime,
             url: 'http://imaurl.com/myroute?queryParam=queryParamValue&queryParam2=queryParamValue2',
             content_length: '100'
-        });
+        }));
 
     });
 
@@ -63,13 +63,13 @@ describe('Churchill', function(){
 
         var responseTime = logSpy.lastCall.args[1].response_time;
 
-        logSpy.should.have.been.calledWith('info', {
+        logSpy.should.have.been.calledWith('info', sinon.match({
             method: 'GET',
             status: 200,
             response_time: responseTime,
             url: 'http://imaurl.com/myroute',
             content_length: '100'
-        });
+        }));
 
     });
 
@@ -92,13 +92,13 @@ describe('Churchill', function(){
 
           var responseTime = logSpy.lastCall.args[1].response_time;
 
-          logSpy.should.have.been.calledWith('info', {
+          logSpy.should.have.been.calledWith('info', sinon.match({
               method: 'GET',
               status: 200,
               response_time: responseTime,
               url: '/myroute',
               content_length: '100'
-          });
+          }));
 
       });
 
