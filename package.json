@@ -17,5 +17,8 @@
     "sinon": "1.7.3",
     "sinon-chai": "2.4.0"
   },
-  "main": "index.js"
+  "main": "index.js",
+  "dependencies": {
+    "random-string": "^0.2.0"
+  }
 }

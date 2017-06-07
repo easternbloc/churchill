@@ -1,5 +1,7 @@
 'use strict';
 
+var random = require('random-string');
+
 var options = {
     logGetParams: true,
     reqLogger: true
@@ -27,6 +29,9 @@ var url = require('url'),
     Churchill;
 
 fn = function (req, res, next) {
+
+    req._loggerToken = random();
+
     var urlToLog;
     if (Churchill.options.logGetParams) {
         urlToLog = req.originalUrl;
@@ -50,7 +55,8 @@ fn = function (req, res, next) {
         requestToLog = {
             status: null,
             method: req.method,
-            url: urlToLog
+            url: urlToLog,
+            id: req._loggerToken
         };
 
     //if we're using a connect middleware logger this will already exist
@@ -78,7 +84,10 @@ fn = function (req, res, next) {
     };
 
     if (Churchill.options.reqLogger) {
-        req.log = log;
+        req.log = function () {
+            var args = [].concat(arguments).concat([{ id: req._loggerToken }]);
+            log.apply(null, args);
+        }
         if (loggers.length && req.logger === undefined) {
             req.logger = loggers[0][0];
         }
